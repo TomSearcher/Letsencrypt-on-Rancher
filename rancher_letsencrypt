@@ -1,0 +1,99 @@
+#!/usr/bin/python
+
+import sys
+import requests
+import json
+import os.path
+import os
+import time
+
+cert_url = ""
+access_key = ""
+secret_key= ""
+rancher_api_url = ""
+cert_email = ""
+
+def local_key_exists():
+	return  os.path.isfile("/etc/letsencrypt/live/"+cert_url+"/privkey.pem")
+
+def cert_exists_in_rancher():
+	r = requests.get(rancher_api_url+'/certificates?name='+cert_url,auth=(access_key,secret_key))
+	ret = r.json()
+	if len(ret['data'])==0:
+		return False
+	else:
+		return True
+
+def get_rancher_id():
+	r = requests.get(rancher_api_url+'/certificates?name='+cert_url,auth=(access_key,secret_key))
+	ret = r.json()
+	return ret['data'][0]['id']
+
+def readPEM(file):
+	f=open(file, 'r')
+	data=f.read()
+	f.close()
+	#return data.replace("\n","\\n")
+	return data
+
+def sync_with_rancher():
+	if local_key_exists()==False:
+		return
+	cert = readPEM("/etc/letsencrypt/live/"+cert_url+"/cert.pem")
+	chain = readPEM("/etc/letsencrypt/live/"+cert_url+"/chain.pem")
+	key = readPEM("/etc/letsencrypt/live/"+cert_url+"/privkey.pem")
+	payload = {
+		'cert': cert,
+		'certChain': chain,
+		'description': cert_url,
+		'key': key,
+		'name': cert_url
+	}
+	headers = {'Content-Type': 'application/json'}
+	if cert_exists_in_rancher():
+		r = requests.put(rancher_api_url+'/certificates/'+get_rancher_id(), data=json.dumps(payload), headers=headers,  auth=(access_key,secret_key))
+		print r.status_code
+	else:
+		r = requests.post(rancher_api_url+'/certificates', data=json.dumps(payload), headers=headers,  auth=(access_key,secret_key))
+		print r.status_code
+
+def letsencrypt_create():
+	os.system("letsencrypt certonly -a webroot --webroot-path=/var/www/html -d "+cert_url+" -n --email="+cert_email+" --agree-tos")
+
+def letsencrypt_renew():
+	os.system("letsencrypt renew -n")
+
+def create():
+	if local_key_exists():
+		sync_with_rancher()
+		return
+	letsencrypt_create()
+	sync_with_rancher()
+
+def renew():
+	print "renewing "+cert_url
+	letsencrypt_renew()
+	sync_with_rancher()
+	return
+
+
+if len(sys.argv)!=7:
+	print sys.argv[0]+" <URL TO CERTIFY> (create|renew) <RANCHER_API_URL> <RANCHER_ACCESS_KEY> <RANCHER_SECRET_KEY> <CERT_EMAIL>"
+	exit()
+else:
+	cert_url = sys.argv[1]
+	access_key = sys.argv[4]
+	secret_key= sys.argv[5]
+	rancher_api_url = sys.argv[3]
+	cert_email = sys.argv[6]
+
+if sys.argv[2] == "create":
+	while local_key_exists()==False:
+		create()
+		time.sleep(5)
+
+if sys.argv[2] == "renew":
+	renew()
+
+exit()
+

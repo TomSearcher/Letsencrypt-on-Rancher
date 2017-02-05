@@ -1,0 +1,7 @@
+#!/bin/bash
+
+service cron start
+anacron
+service nginx start
+/root/rancher_letsencrypt $CERT_URL create $RANCHER_API_URL $RANCHER_ACCESS_KEY $RANCHER_SECRET_KEY $CERT_EMAIL
+service nginx stop

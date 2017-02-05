@@ -1,0 +1,5 @@
+#!/bin/bash
+
+service nginx start
+/root/rancher_letsencrypt $CERT_URL renew $RANCHER_API_URL $RANCHER_ACCESS_KEY $RANCHER_SECRET_KEY $CERT_EMAIL
+service nginx stop
