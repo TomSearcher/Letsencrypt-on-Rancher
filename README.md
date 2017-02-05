@@ -34,5 +34,7 @@ The Rancher API credentials can be found and configured from the Rancher adminis
 ### Obtaining CERT_URL and CERT_EMAIL
 
 CERT_URL is the domain name, which you want to get certified. So, for example CERT_URL=www.example.com for https://www.example.com. CERT_EMAIL can be any email address. There, you receive notifications from Let's Encrypt in case of certificate expiry, etc. Please note,  that **port 80 of this container has to be reachable from internet**, such that Let's Encrypt certification process works.
+In Rancher, this can be easily achieved, by using their integrated load balncer to forward all requests to /.well-known to this letsencrypt-on-rancher container. In below example all requests to http://www.example.com/.well-known are sent to the container called letsencrypt, which is this container.
+![alt tag](https://raw.githubusercontent.com/TomSearcher/Letsencrypt-on-Rancher/master/rancher_lb.PNG)
 
 ## Launching the container
