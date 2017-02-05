@@ -4,7 +4,7 @@ This is just the Dockerfile and scripts to build a container, which allows autom
 
 # Build your own docker image 
 You may pull the readily build image tomsearcher/letsencrypt_on_rancher from docker hub (see usage below).
-Alternatively you may create from this files your own image.
+Alternatively you may create your own image:
 
 ```
 git clone https://github.com/TomSearcher/Letsencrypt-on-Rancher
@@ -15,7 +15,7 @@ docker build -t yourimage .
 # Use Letsencrypt-on-rancher
 
 ## Required Environmental Variables
-Following Environmental variables have to be defined when launching the Container. The first three values are used to specify the Rancher API endpoint. The latter two are used to specify the domain name and email address, for which the ssl certificate is to be requested at Let's Encrypt (https://letsencrypt.org/).
+Following Environmental variables have to be defined when launching the Container. The first three values are used to specify the Rancher API endpoint. The latter two are used, to specify the domain name and email address, for which the ssl certificate is to be requested at Let's Encrypt (https://letsencrypt.org/).
 
 ```
 RANCHER_API_URL = Rancher API's http endpoint 
