@@ -16,7 +16,7 @@ docker build -t yourimage .
 
 # Use Letsencrypt-on-rancher
 
-Following Environmental variables have to be defined when launching the Container. The first three values are, to specify the Rancher API endpoint. The latter two are used to specify the domain name and email address, for which the ssl certificate is to be requested at Let's Encrypt (https://letsencrypt.org/)
+Following Environmental variables have to be defined when launching the Container. The first three values are used to specify the Rancher API endpoint. The latter two are used to specify the domain name and email address, for which the ssl certificate is to be requested at Let's Encrypt (https://letsencrypt.org/).
 
 ```
 RANCHER_API_URL = Rancher API's http endpoint 
@@ -25,5 +25,6 @@ RANCHER_SECRET_KEY = Rancher API Secret Key
 CERT_URL = The Domain name, for which a certificate ihas to be requested
 CERT_EMAIL = Email to list within the ssl certificate
 ```
-##
-hbhb
+## Obtaining the Rancher API details
+
+The Rancher API credentials can be found and configured from the Rancher administrative page under the Admin tab. Click "Add Account API Key" for obtaining a fresh Access Key and secret. Those have to be copied to above environmental variables. The Rancher API URL is also listed on the same admin page.
