@@ -38,5 +38,12 @@ In Rancher, this can be easily achieved, by using their integrated load balncer 
 ![alt tag](https://raw.githubusercontent.com/TomSearcher/Letsencrypt-on-Rancher/master/rancher_lb.PNG)
 
 ## Launching the container
-### Using Docker CLI
-```docker run -it -e RANCHER_API_URL="url" -e RANCHER_ACCESS_KEY="access_Key" -e RANCHER_SECRET_KEY="AP_Key" -e CERT_URL="domain_name" CERT_EMAIL="email" -p 80:80```
+
+### Option 1: Via Rancher Admin Page
+Create a container in Rancher just as usual:
+![alt tag](https://raw.githubusercontent.com/TomSearcher/Letsencrypt-on-Rancher/master/rancher_example.PNG)
+
+### Option 2: Using Docker CLI
+```
+docker run -it -e RANCHER_API_URL="url" -e RANCHER_ACCESS_KEY="access_Key" -e RANCHER_SECRET_KEY="AP_Key" -e CERT_URL="domain_name" CERT_EMAIL="email" -p 80:80
+```
