@@ -1,8 +1,6 @@
 # Letsencrypt-on-Rancher
 This is just the Dockerfile and scripts to build a container, which allows automatic creation and renewal of Let's Encrypt (https://letsencrypt.org/) ssl certificates. After creation and renewal it get's synchronized with your installation of Rancher's (http://rancher.com) certificate library.  
 
-# Main Working Principal
-
 
 # Build your own docker image 
 You may pull the readily build image tomsearcher/letsencrypt_on_rancher from docker hub (see usage below).
