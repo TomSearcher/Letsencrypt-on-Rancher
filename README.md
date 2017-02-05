@@ -5,8 +5,8 @@ This is just the Dockerfile and scripts to build a container, which allows autom
 You may pull the readily build image tomsearcher/letsencrypt_on_rancher from docker hub (see usage below).
 Alternatively you may create from this files your own image.
 
-'''
+```
 git clone https://github.com/TomSearcher/Letsencrypt-on-Rancher
 cd Letsencrypt-on-Rancher/
 docker build -t yourimage .
-'''
+```
