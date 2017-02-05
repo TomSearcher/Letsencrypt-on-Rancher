@@ -47,3 +47,6 @@ Create a container in Rancher just as usual:
 ```
 docker run -it -e RANCHER_API_URL="url" -e RANCHER_ACCESS_KEY="access_Key" -e RANCHER_SECRET_KEY="AP_Key" -e CERT_URL="domain_name" CERT_EMAIL="email" -p 80:80
 ```
+
+## All ok?
+After a while the certificate should appear within Rancher under "Infrastructure > Certificates". Otherwise check the log output of the container for potential issues. The process fails if the container is not reachable on port 80 of the domain to be certified.
