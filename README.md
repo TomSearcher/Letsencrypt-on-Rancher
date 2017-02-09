@@ -26,8 +26,8 @@ CERT_EMAIL = Email to list within the ssl certificate
 ```
 ### Obtaining the Rancher API details
 
-The Rancher API credentials can be found and configured from the Rancher administrative page under the API tab. Click "Add Account API Key" for obtaining a fresh Access Key and Secret. Those have to be copied to above environmental variables. The Rancher API URL is also listed on the same admin page.
-![alt tag](https://raw.githubusercontent.com/TomSearcher/Letsencrypt-on-Rancher/master/rancher_api.PNG)
+The Rancher API credentials can be found and configured from the Rancher administrative page under the API tab. Click "Add Environment API Key" for obtaining a fresh Access Key and Secret. Those have to be copied to above environmental variables. The Rancher API URL is also listed on the same admin page.
+![alt tag](https://github.com/TomSearcher/Letsencrypt-on-Rancher/blob/master/api_key.PNG)
 
 ### Obtaining CERT_URL and CERT_EMAIL
 
